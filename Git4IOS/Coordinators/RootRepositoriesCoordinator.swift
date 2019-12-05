@@ -23,7 +23,7 @@ class RootRepositoriesCoordinator: UIViewController, UINavigationControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         navController.delegate = self
-        tabbarController.viewControllers = [navController, UIViewController()]
+        tabbarController.viewControllers = [navController, LogoutViewController()]
         swiftRepositoriesViewCoordinator.repositoriesType = .swift
         objectiveCRepositoriesViewCoordinator.repositoriesType = .objectiveC
 

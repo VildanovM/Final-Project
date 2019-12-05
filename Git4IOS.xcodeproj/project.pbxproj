@@ -24,6 +24,8 @@
 		974FD9C72391A5330084900E /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974FD9C62391A5330084900E /* ReusableView.swift */; };
 		97610FED2392619B0089B128 /* OfflineProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97610FEC2392619B0089B128 /* OfflineProvider.swift */; };
 		97610FEF239266060089B128 /* LoginViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97610FEE239266060089B128 /* LoginViewCoordinator.swift */; };
+		97610FF12392F2920089B128 /* LogoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97610FF02392F2920089B128 /* LogoutViewController.swift */; };
+		976110492396D3880089B128 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976110482396D3880089B128 /* NetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		974FD9C62391A5330084900E /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		97610FEC2392619B0089B128 /* OfflineProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineProvider.swift; sourceTree = "<group>"; };
 		97610FEE239266060089B128 /* LoginViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewCoordinator.swift; sourceTree = "<group>"; };
+		97610FF02392F2920089B128 /* LogoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutViewController.swift; sourceTree = "<group>"; };
+		976110482396D3880089B128 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +84,7 @@
 			children = (
 				972C3E362386D32100189EF0 /* AppDelegate.swift */,
 				972C3E382386D32100189EF0 /* SceneDelegate.swift */,
+				9761104A2396D5D70089B128 /* Service */,
 				974FD9C82391A5550084900E /* Extension */,
 				974FD9B823919D790084900E /* Model */,
 				974FD9B52391956D0084900E /* Coordinators */,
@@ -98,6 +103,7 @@
 				974FD9AE239194D60084900E /* SegmentedViewController.swift */,
 				974FD9BD23919E980084900E /* ListViewController.swift */,
 				97610FEC2392619B0089B128 /* OfflineProvider.swift */,
+				97610FF02392F2920089B128 /* LogoutViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -115,7 +121,6 @@
 		974FD9B823919D790084900E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				974FD9B623919B2F0084900E /* GithubResourses.swift */,
 				974FD9B923919D940084900E /* RepositoriesModel.swift */,
 			);
 			path = Model;
@@ -138,6 +143,15 @@
 				974FD9C62391A5330084900E /* ReusableView.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		9761104A2396D5D70089B128 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				976110482396D3880089B128 /* NetworkService.swift */,
+				974FD9B623919B2F0084900E /* GithubResourses.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,7 +227,9 @@
 				972C3E372386D32100189EF0 /* AppDelegate.swift in Sources */,
 				974FD9BE23919E980084900E /* ListViewController.swift in Sources */,
 				974FD9C023919F2A0084900E /* ListViewCell.swift in Sources */,
+				976110492396D3880089B128 /* NetworkService.swift in Sources */,
 				974FD9B4239195660084900E /* RepositoriesViewCoordinator.swift in Sources */,
+				97610FF12392F2920089B128 /* LogoutViewController.swift in Sources */,
 				972C3E392386D32100189EF0 /* SceneDelegate.swift in Sources */,
 				974FD9BC23919DC60084900E /* UIViewController+Container.swift in Sources */,
 				974FD9AD239194B60084900E /* DetailViewController.swift in Sources */,

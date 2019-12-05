@@ -11,13 +11,15 @@ import Foundation
 public enum RepositoriesType: String {
     case swift = "Swift"
     case objectiveC = "Objective C"
-
+    
     var githubRessourceURL: String {
         switch self {
         case .swift:
-            return ""
+            return "https://api.github.com/search/repositories?q=swift+language:swift&sort=stars"
         case .objectiveC:
-            return ""
+            return "https://api.github.com/search/repositories?q=ios+language:objectivec&sort=stars"
         }
     }
 }
+
+

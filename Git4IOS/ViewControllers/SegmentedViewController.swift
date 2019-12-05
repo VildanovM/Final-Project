@@ -71,8 +71,6 @@ class SegmentedViewController: UIViewController {
     private func segmentDidChange(segment: UISegmentedControl) {
         
         selectController(at: segment.selectedSegmentIndex)
-        
-        print(segment.selectedSegmentIndex)
     }
     
     private func selectController(at index: Int ) {

@@ -22,7 +22,7 @@ class RepositoriesViewCoordinator: UIViewController, UITableViewDelegate {
 
     private let repositoriesViewController = ListViewController()
 
-    private var repositories = [String]()
+    private var jsonModel: Model?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,10 +32,30 @@ class RepositoriesViewCoordinator: UIViewController, UITableViewDelegate {
         add(asChildViewController: repositoriesViewController)
     }
     
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NetworkService.get(url: repositoriesType.githubRessourceURL) { [weak self] json in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                guard let json = json else { return }
+                self.jsonModel = json
+                self.repositoriesViewController.jsonModel = json
+                
+            }
+        }
+        
+    }
+    
 
       // MARK: - UITableViewDelegate
 
       public func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailViewController = DetailViewController()
+
+//        let detail = jsonModel?.items[indexPath.row]
+
+        navigationController?.pushViewController(detailViewController, animated: true)
         
       }
 
