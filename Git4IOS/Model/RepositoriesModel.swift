@@ -9,11 +9,13 @@
 import Foundation
 
 struct Model: Decodable {
+    
     var items : [Items]
 
 }
 
 struct Items: Decodable {
+    
     var name : String?
     var full_name: String?
     var html_url: String?
@@ -21,4 +23,5 @@ struct Items: Decodable {
     var stargazers_count: Int?
     var watchers_count: Int?
     var forks_count: Int?
+    
 }

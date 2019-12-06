@@ -9,6 +9,7 @@
 import Foundation
 
 public enum RepositoriesType: String {
+    
     case swift = "Swift"
     case objectiveC = "Objective C"
     

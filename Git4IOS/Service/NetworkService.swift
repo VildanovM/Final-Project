@@ -10,29 +10,33 @@ import Foundation
 
 class NetworkService {
     
-    static func get(url: String, _ complition: @escaping (Model?) -> ()) {
+    public static func get(url: String, _ complition: @escaping (Model?) -> ()) {
         
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
         
-        let url = URL(string: url)!
-        let urlRequest = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 60)
         
-        let task1 = session.dataTask(with: urlRequest, completionHandler: {(data, response, error)
-            in
-            do {
-                let posts = try JSONDecoder().decode(Model.self, from: data!)
-                complition(posts)
-
-            } catch {
-                complition(nil)
-                print(error)
-            }
-        })
-        task1.resume()
+        let url = URL(string: url)
+        if let url = url {
+            let urlRequest = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 60)
+            
+            let task1 = session.dataTask(with: urlRequest, completionHandler: {(data, response, error)
+                in
+                do {
+                    if let data = data {
+                        let posts = try JSONDecoder().decode(Model.self, from: data)
+                        complition(posts)
+                    }
+                    
+                } catch {
+                    complition(nil)
+                    print(error)
+                }
+            })
+            task1.resume()
+        }
         
     }
     
-
 }
 

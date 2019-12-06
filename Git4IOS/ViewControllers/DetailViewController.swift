@@ -9,22 +9,139 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-
+    
+    // MARK: - Public variables
+    public var descriptionRepository = UILabel()
+    public var buttonPushToGithub = UIButton()
+    public var starsCount = UILabel()
+    public var watchersCount = UILabel()
+    public var forksCount = UILabel()
+    public var titleRepositories = ""
+    public var url = ""
+    
+    // MARK: - Private variables
+    private let stackView = UIStackView()
+    private let starsStackView = UIStackView()
+    private let forksStackView = UIStackView()
+    private let watchersStackView = UIStackView()
+    private let infoStackView = UIStackView()
+    private let imageStars = UIImageView()
+    private let imageForks = UIImageView()
+    private let imageWatchers = UIImageView()
+    private let navigationRoot = RootRepositoriesCoordinator()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        setViews()
+        setStackView()
+        setInfoStackView()
+        setButtonOnStack()
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        descriptionRepository.alpha = 0
+        UIView.animate(withDuration: 1, animations: {
+            self.descriptionRepository.alpha = 1
+        })
     }
-    */
-
+    
+    
+    private func setViews() {
+        
+        view.backgroundColor = .white
+        self.title = titleRepositories
+        
+        buttonPushToGithub.setTitle("Go To GitHub", for: .normal)
+        buttonPushToGithub.backgroundColor = .blue
+        buttonPushToGithub.layer.cornerRadius = 10
+        buttonPushToGithub.addTarget(self, action: #selector(goToGithub), for: .touchUpInside)
+        
+        descriptionRepository.numberOfLines = 0
+        descriptionRepository.font = UIFont.systemFont(ofSize: 20)
+        descriptionRepository.textAlignment = .center
+        
+        imageForks.image = UIImage(named: "git_fork-512")
+        imageStars.image = UIImage(named: "star")
+        imageWatchers.image = UIImage(named: "watch")
+        
+    }
+    
+    private func setStackView() {
+        
+        stackView.axis = .vertical
+        stackView.distribution = .equalSpacing
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.preservesSuperviewLayoutMargins = true
+        view.addSubview(stackView)
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
+        
+        stackView.addArrangedSubview(descriptionRepository)
+        
+    }
+    
+    
+    private func setInfoStackView() {
+        
+        infoStackView.axis = .horizontal
+        infoStackView.distribution = .fillEqually
+        
+        
+        starsStackView.axis = .horizontal
+        starsStackView.distribution = .fillEqually
+        starsStackView.isLayoutMarginsRelativeArrangement = true
+        starsStackView.preservesSuperviewLayoutMargins = true
+        starsStackView.addArrangedSubview(imageStars)
+        starsStackView.addArrangedSubview(starsCount)
+        
+        forksStackView.axis = .horizontal
+        forksStackView.distribution = .fillEqually
+        forksStackView.isLayoutMarginsRelativeArrangement = true
+        forksStackView.preservesSuperviewLayoutMargins = true
+        forksStackView.addArrangedSubview(imageForks)
+        forksStackView.addArrangedSubview(forksCount)
+        
+        watchersStackView.axis = .horizontal
+        watchersStackView.distribution = .fillEqually
+        watchersStackView.isLayoutMarginsRelativeArrangement = true
+        watchersStackView.preservesSuperviewLayoutMargins = true
+        watchersStackView.addArrangedSubview(imageWatchers)
+        watchersStackView.addArrangedSubview(watchersCount)
+        
+        infoStackView.addArrangedSubview(starsStackView)
+        infoStackView.addArrangedSubview(forksStackView)
+        infoStackView.addArrangedSubview(watchersStackView)
+        
+        stackView.addArrangedSubview(infoStackView)
+        stackView.addArrangedSubview(buttonPushToGithub)
+        
+        infoStackView.translatesAutoresizingMaskIntoConstraints = false
+        infoStackView.heightAnchor.constraint(lessThanOrEqualTo: stackView.heightAnchor, multiplier: 0.1).isActive = true
+        
+        
+    }
+    
+    private func setButtonOnStack() {
+        buttonPushToGithub.translatesAutoresizingMaskIntoConstraints = false
+        buttonPushToGithub.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.1).isActive = true
+    }
+    
+    
+    @objc private func goToGithub() {
+        
+        buttonPushToGithub.pulsate()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.navigationRoot.goToGithub(url: self.url)
+        }
+        
+    }
+    
 }

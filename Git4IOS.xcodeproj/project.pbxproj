@@ -26,6 +26,8 @@
 		97610FEF239266060089B128 /* LoginViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97610FEE239266060089B128 /* LoginViewCoordinator.swift */; };
 		97610FF12392F2920089B128 /* LogoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97610FF02392F2920089B128 /* LogoutViewController.swift */; };
 		976110492396D3880089B128 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976110482396D3880089B128 /* NetworkService.swift */; };
+		97611053239980ED0089B128 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97611052239980ED0089B128 /* LoadingViewController.swift */; };
+		97611055239988C70089B128 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97611054239988C70089B128 /* UIButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		97610FEE239266060089B128 /* LoginViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewCoordinator.swift; sourceTree = "<group>"; };
 		97610FF02392F2920089B128 /* LogoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutViewController.swift; sourceTree = "<group>"; };
 		976110482396D3880089B128 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		97611052239980ED0089B128 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		97611054239988C70089B128 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,7 @@
 			children = (
 				972C3E362386D32100189EF0 /* AppDelegate.swift */,
 				972C3E382386D32100189EF0 /* SceneDelegate.swift */,
+				97610FEC2392619B0089B128 /* OfflineProvider.swift */,
 				9761104A2396D5D70089B128 /* Service */,
 				974FD9C82391A5550084900E /* Extension */,
 				974FD9B823919D790084900E /* Model */,
@@ -102,8 +107,8 @@
 				974FD9AC239194B60084900E /* DetailViewController.swift */,
 				974FD9AE239194D60084900E /* SegmentedViewController.swift */,
 				974FD9BD23919E980084900E /* ListViewController.swift */,
-				97610FEC2392619B0089B128 /* OfflineProvider.swift */,
 				97610FF02392F2920089B128 /* LogoutViewController.swift */,
+				97611052239980ED0089B128 /* LoadingViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -141,6 +146,7 @@
 				974FD9C22391A3BA0084900E /* UIViewController+Anchors.swift */,
 				974FD9C42391A3F10084900E /* UIVIew+Anchors.swift */,
 				974FD9C62391A5330084900E /* ReusableView.swift */,
+				97611054239988C70089B128 /* UIButton.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -149,9 +155,17 @@
 			isa = PBXGroup;
 			children = (
 				976110482396D3880089B128 /* NetworkService.swift */,
-				974FD9B623919B2F0084900E /* GithubResourses.swift */,
+				97611051239958B50089B128 /* Service Helper */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		97611051239958B50089B128 /* Service Helper */ = {
+			isa = PBXGroup;
+			children = (
+				974FD9B623919B2F0084900E /* GithubResourses.swift */,
+			);
+			path = "Service Helper";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,9 +248,11 @@
 				974FD9BC23919DC60084900E /* UIViewController+Container.swift in Sources */,
 				974FD9AD239194B60084900E /* DetailViewController.swift in Sources */,
 				974FD9BA23919D940084900E /* RepositoriesModel.swift in Sources */,
+				97611053239980ED0089B128 /* LoadingViewController.swift in Sources */,
 				974FD9B2239195440084900E /* RootRepositoriesCoordinator.swift in Sources */,
 				974FD9C72391A5330084900E /* ReusableView.swift in Sources */,
 				974FD9AF239194D60084900E /* SegmentedViewController.swift in Sources */,
+				97611055239988C70089B128 /* UIButton.swift in Sources */,
 				974FD9B723919B2F0084900E /* GithubResourses.swift in Sources */,
 				97610FEF239266060089B128 /* LoginViewCoordinator.swift in Sources */,
 				97610FED2392619B0089B128 /* OfflineProvider.swift in Sources */,

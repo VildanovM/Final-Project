@@ -8,26 +8,14 @@
 
 import UIKit
 
-public protocol Listable {
-    var titleText: String { get }
-    var descriptionText: String { get }
-}
-
 class ListViewController: UITableViewController {
-    
+
     let githubResourse = RepositoriesType.swift
     var jsonModel: Model? {
         didSet {
             tableView.reloadData()
         }
     }
-    
-
-//    public var list = [Listable]() {
-//        didSet {
-//            tableView.reloadData()
-//        }
-//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,11 +33,13 @@ class ListViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //datasource.getData _> //
-        let cell = tableView.dequeueReusableCell(withIdentifier: ListViewCell.reuseID, for: indexPath) as! ListViewCell
-//            cell.titleName.text = jsonModel?.items[indexPath.row].name
-//            return cell
-        cell.titleName.text = jsonModel?.items[indexPath.row].name
-        return cell
-        
+        if let starCount = jsonModel?.items[indexPath.row].stargazers_count, let name = jsonModel?.items[indexPath.row].name {
+                let cell = tableView.dequeueReusableCell(withIdentifier: ListViewCell.reuseID, for: indexPath) as! ListViewCell
+                cell.titleName.text = name
+            cell.starCount.text = "★" + String(starCount)
+                return cell
+        }
+        return UITableViewCell()
     }
+    
 }
