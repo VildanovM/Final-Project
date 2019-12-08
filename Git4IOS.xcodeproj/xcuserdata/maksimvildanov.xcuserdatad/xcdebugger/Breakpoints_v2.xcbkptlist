@@ -44,9 +44,9 @@
             filePath = "Git4IOS/ViewControllers/SingInViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "singInAction()"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
+            landmarkName = "setConstraintsAndAddSubview()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

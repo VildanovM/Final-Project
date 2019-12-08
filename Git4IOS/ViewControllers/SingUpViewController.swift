@@ -61,6 +61,9 @@ class SingUpViewController: UIViewController, UITextFieldDelegate {
         emailTextField.borderStyle = .bezel
         passwordTextField.borderStyle = .bezel
         confirmPasswordTextField.borderStyle = .bezel
+        emailTextField.autocorrectionType = .no
+        passwordTextField.autocorrectionType = .no
+        confirmPasswordTextField.autocorrectionType = .no
         
     }
     

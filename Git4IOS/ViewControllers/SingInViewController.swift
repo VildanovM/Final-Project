@@ -43,6 +43,14 @@ class SingInViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loginMessageLabel.alpha = 0
+        UIView.animate(withDuration: 1, animations: {
+            self.loginMessageLabel.alpha = 1
+        })
+    }
+    
     // MARK: - Private function
     private func setMainStackView() {
         
@@ -60,6 +68,9 @@ class SingInViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.placeholder = "password"
         emailTextField.borderStyle = .bezel
         passwordTextField.borderStyle = .bezel
+        
+        emailTextField.autocorrectionType = .no
+        passwordTextField.autocorrectionType = .no
         
     }
     
@@ -111,13 +122,18 @@ class SingInViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func singInAction() {
-        self.delegate?.navigateToNextPage()
+        singInButton.pulsate()
+        UIView.animate(withDuration: 0.3) {
+            self.singInButton.backgroundColor = .gray
+            self.singInButton.backgroundColor = .blue
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.delegate?.navigateToNextPage()
+        }
     }
     
     @objc private func singUpAction() {
         
-        let singUpViewController = SingUpViewController()
-        present(singUpViewController, animated: true, completion: nil)
         
     }
     
