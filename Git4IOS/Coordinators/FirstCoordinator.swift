@@ -1,46 +1,47 @@
-////
-////  FirstCoordinator.swift
-////  Git4IOS
-////
-////  Created by Максим Вильданов on 07.12.2019.
-////  Copyright © 2019 Максим Вильданов. All rights reserved.
-////
 //
-//import Foundation
-//import UIKit
+//  FirstCoordinator.swift
+//  CoordinatorDemo
 //
-//class SingInCoordinator: Coordinator {
-//    
-//    var childCoordinators: [Coordinator] = []
-//    
-//    unowned let navigationController:UINavigationController
-//    
-//    required init(navigationController: UINavigationController) {
-//        self.navigationController = navigationController
-//    }
-//    
-//    func start() {
-//        let singInController = SingInViewController()
-//        singInController.delegate = self
-//        self.navigationController.viewControllers = [singInController]
-//    }
-//}
+//  Created by Saad El Oulladi on 29/09/2018.
+//  Copyright © 2018 touti. All rights reserved.
 //
-//extension SingInViewController: SingInViewControllerDelegate {
-//
-//    // Navigate to next page
-//    func navigateToNextPage() {
-//       let secondCoordinator = SecondCoordinator(navigationController: navigationController)
-//       secondCoordinator.delegate = self
-//       childCoordinators.append(secondCoordinator)
-//       secondCoordinator.start()
-//    }
-//}
-//
-//extension FirstCoordinator: BackToFirstViewControllerDelegate {
-//    
-//    // Back from third page
-//    func navigateBackToFirstPage(newOrderCoordinator: SecondCoordinator) {
-//        navigationController.popToRootViewController(animated: true)
-//        childCoordinators.removeLast()
-//    }
+
+import UIKit
+
+class FirstCoordinator: Coordinator {
+    
+    var childCoordinators: [Coordinator] = []
+    
+    unowned let navigationController:UINavigationController
+    
+    required init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+        navigationController.isNavigationBarHidden = true
+    }
+    
+    func start() {
+        let firstViewController : SingInViewController = SingInViewController()
+        firstViewController.delegate = self
+        self.navigationController.viewControllers = [firstViewController]
+    }
+}
+
+extension FirstCoordinator: FirstViewControllerDelegate {
+
+    // Navigate to next page
+    func navigateToNextPage() {
+       let secondCoordinator = SecondCoordinator(navigationController: navigationController)
+       secondCoordinator.delegate = self
+       childCoordinators.append(secondCoordinator)
+       secondCoordinator.start()
+    }
+}
+
+extension FirstCoordinator: BackToFirstViewControllerDelegate {
+    
+    // Back from third page
+    func navigateBackToFirstPage(newOrderCoordinator: SecondCoordinator) {
+        navigationController.popToRootViewController(animated: true)
+        childCoordinators.removeLast()
+    }
+}

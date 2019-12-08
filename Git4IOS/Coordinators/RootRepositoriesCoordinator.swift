@@ -8,21 +8,29 @@
 
 import UIKit
 
-class RootRepositoriesCoordinator: UIViewController, UINavigationControllerDelegate {
+public protocol SecondViewControllerDelegate: class {
+    func navigateToFirstPage()
+    func navigateToThirdPage()
+}
+
+class RootRepositoriesCoordinator: UIViewController, UINavigationControllerDelegate, UITabBarControllerDelegate {
     
-    
+    public weak var delegate: SecondViewControllerDelegate?
     // MARK: - Private variables
     private let segmentedViewController = SegmentedViewController()
     private let swiftRepositoriesViewCoordinator = RepositoriesViewCoordinator()
     private let objectiveCRepositoriesViewCoordinator = RepositoriesViewCoordinator()
-    private let tabbarController = UITabBarController()
+    private lazy var tabbarController = UITabBarController()
     private lazy var navController = UINavigationController(rootViewController: tabbarController)
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navController.delegate = self
         swiftRepositoriesViewCoordinator.repositoriesType = .swift
         objectiveCRepositoriesViewCoordinator.repositoriesType = .objectiveC
+        tabbarController.delegate = self
         tabbarController.viewControllers = [segmentedViewController, LogoutViewController()]
         
         add(asChildViewController: navController)
@@ -34,15 +42,11 @@ class RootRepositoriesCoordinator: UIViewController, UINavigationControllerDeleg
         UIApplication.shared.open(URL(string: url)! as URL, options: [:], completionHandler: nil)
     }
     
-    public func presentToSingUpViewController() {
-        let singUpViewController = SingUpViewController()
-        present(singUpViewController, animated: true, completion: nil)
-    }
+//    public func presentToSingUpViewController() {
+//        let singUpViewController = SingUpViewController()
+//        present(singUpViewController, animated: true, completion: nil)
+//    }
     
-    public func pushToSingInViewController() {
-        let singInViewController = SingInViewController()
-        navigationController?.pushViewController(singInViewController, animated: true)
-    }
     
     public func pushToLogout() {
         let logoutViewController = LogoutViewController()
@@ -57,4 +61,18 @@ class RootRepositoriesCoordinator: UIViewController, UINavigationControllerDeleg
         navigationController.setNavigationBarHidden(hide, animated: animated)
     }
     
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        let selectedIndex = tabBarController.viewControllers?.firstIndex(of: viewController)!
+        if selectedIndex == 1 {
+            self.delegate?.navigateToThirdPage()
+            return false
+        }
+        return true
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        
+        
+        
+    }
 }

@@ -11,7 +11,9 @@ import UIKit
 class LogoutViewController: UIViewController {
     
     private let logoutButton = UIButton()
-    private let navigationRoot = RootRepositoriesCoordinator()
+    private var rootNavigation = RootRepositoriesCoordinator()
+    public weak var delegate: SecondViewControllerDelegate?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +49,7 @@ class LogoutViewController: UIViewController {
             self.logoutButton.backgroundColor = .blue
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            
+            self.delegate?.navigateToFirstPage()
         }
         
     }

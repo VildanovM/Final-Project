@@ -11,14 +11,20 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var fisrtCoordinator : FirstCoordinator?
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let sceneOne = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: sceneOne)
-        let rootCoordinator = RootRepositoriesCoordinator()
-        window?.rootViewController = rootCoordinator
+        window?.rootViewController = UINavigationController()
         
+        
+        fisrtCoordinator = FirstCoordinator(navigationController: window?.rootViewController as! UINavigationController)
+        
+         
+         // The start method will actually display the main view
+        fisrtCoordinator?.start()
         window?.makeKeyAndVisible()
         
         

@@ -8,7 +8,11 @@
 
 import UIKit
 
+
+
 class SingUpViewController: UIViewController, UITextFieldDelegate {
+    
+    public weak var delegate: SecondViewControllerDelegate?
     
     // MARK: - Private variables
     private let loginMessageLabel = UILabel()

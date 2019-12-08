@@ -33,6 +33,7 @@
 		97611061239C1AB90089B128 /* SingUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97611060239C1AB90089B128 /* SingUpViewController.swift */; };
 		97611065239C41FA0089B128 /* Coordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97611064239C41FA0089B128 /* Coordinators.swift */; };
 		97611067239C42660089B128 /* FirstCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97611066239C42660089B128 /* FirstCoordinator.swift */; };
+		97611069239C44510089B128 /* SecondCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97611068239C44510089B128 /* SecondCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		97611060239C1AB90089B128 /* SingUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpViewController.swift; sourceTree = "<group>"; };
 		97611064239C41FA0089B128 /* Coordinators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinators.swift; sourceTree = "<group>"; };
 		97611066239C42660089B128 /* FirstCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCoordinator.swift; sourceTree = "<group>"; };
+		97611068239C44510089B128 /* SecondCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 			children = (
 				97611064239C41FA0089B128 /* Coordinators.swift */,
 				97611066239C42660089B128 /* FirstCoordinator.swift */,
+				97611068239C44510089B128 /* SecondCoordinator.swift */,
 				974FD9B1239195440084900E /* RootRepositoriesCoordinator.swift */,
 				974FD9B3239195660084900E /* RepositoriesViewCoordinator.swift */,
 				97610FEE239266060089B128 /* LoginViewCoordinator.swift */,
@@ -256,6 +259,7 @@
 				9761105F239C1AAE0089B128 /* SingInViewController.swift in Sources */,
 				974FD9C52391A3F10084900E /* UIVIew+Anchors.swift in Sources */,
 				972C3E372386D32100189EF0 /* AppDelegate.swift in Sources */,
+				97611069239C44510089B128 /* SecondCoordinator.swift in Sources */,
 				974FD9BE23919E980084900E /* ListViewController.swift in Sources */,
 				974FD9C023919F2A0084900E /* ListViewCell.swift in Sources */,
 				976110492396D3880089B128 /* NetworkService.swift in Sources */,

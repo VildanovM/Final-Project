@@ -8,6 +8,10 @@
 
 import UIKit
 
+public protocol FirstViewControllerDelegate: class {
+    func navigateToNextPage()
+}
+
 class SingInViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Private variables
@@ -19,6 +23,8 @@ class SingInViewController: UIViewController, UITextFieldDelegate {
     private let emailAndPasswordStackView = UIStackView()
     private let singUpButton = UIButton()
     private let rootNavigation = RootRepositoriesCoordinator()
+    
+    public weak var delegate: FirstViewControllerDelegate?
     
     override func viewDidLoad() {
         
@@ -105,6 +111,7 @@ class SingInViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func singInAction() {
+        self.delegate?.navigateToNextPage()
     }
     
     @objc private func singUpAction() {
