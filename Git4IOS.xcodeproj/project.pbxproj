@@ -28,6 +28,11 @@
 		976110492396D3880089B128 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976110482396D3880089B128 /* NetworkService.swift */; };
 		97611053239980ED0089B128 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97611052239980ED0089B128 /* LoadingViewController.swift */; };
 		97611055239988C70089B128 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97611054239988C70089B128 /* UIButton.swift */; };
+		97611057239ACAFB0089B128 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97611056239ACAFB0089B128 /* Launch Screen.storyboard */; };
+		9761105F239C1AAE0089B128 /* SingInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9761105E239C1AAE0089B128 /* SingInViewController.swift */; };
+		97611061239C1AB90089B128 /* SingUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97611060239C1AB90089B128 /* SingUpViewController.swift */; };
+		97611065239C41FA0089B128 /* Coordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97611064239C41FA0089B128 /* Coordinators.swift */; };
+		97611067239C42660089B128 /* FirstCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97611066239C42660089B128 /* FirstCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +59,11 @@
 		976110482396D3880089B128 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		97611052239980ED0089B128 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		97611054239988C70089B128 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
+		97611056239ACAFB0089B128 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		9761105E239C1AAE0089B128 /* SingInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingInViewController.swift; sourceTree = "<group>"; };
+		97611060239C1AB90089B128 /* SingUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpViewController.swift; sourceTree = "<group>"; };
+		97611064239C41FA0089B128 /* Coordinators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinators.swift; sourceTree = "<group>"; };
+		97611066239C42660089B128 /* FirstCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +106,7 @@
 				974FD9B0239194DF0084900E /* ViewControllers */,
 				974FD9C123919F920084900E /* Cell */,
 				972C3E3F2386D32600189EF0 /* Assets.xcassets */,
+				97611056239ACAFB0089B128 /* Launch Screen.storyboard */,
 				972C3E442386D32600189EF0 /* Info.plist */,
 			);
 			path = Git4IOS;
@@ -109,6 +120,8 @@
 				974FD9BD23919E980084900E /* ListViewController.swift */,
 				97610FF02392F2920089B128 /* LogoutViewController.swift */,
 				97611052239980ED0089B128 /* LoadingViewController.swift */,
+				9761105E239C1AAE0089B128 /* SingInViewController.swift */,
+				97611060239C1AB90089B128 /* SingUpViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -116,6 +129,8 @@
 		974FD9B52391956D0084900E /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
+				97611064239C41FA0089B128 /* Coordinators.swift */,
+				97611066239C42660089B128 /* FirstCoordinator.swift */,
 				974FD9B1239195440084900E /* RootRepositoriesCoordinator.swift */,
 				974FD9B3239195660084900E /* RepositoriesViewCoordinator.swift */,
 				97610FEE239266060089B128 /* LoginViewCoordinator.swift */,
@@ -226,6 +241,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97611057239ACAFB0089B128 /* Launch Screen.storyboard in Resources */,
 				972C3E402386D32600189EF0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -237,6 +253,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9761105F239C1AAE0089B128 /* SingInViewController.swift in Sources */,
 				974FD9C52391A3F10084900E /* UIVIew+Anchors.swift in Sources */,
 				972C3E372386D32100189EF0 /* AppDelegate.swift in Sources */,
 				974FD9BE23919E980084900E /* ListViewController.swift in Sources */,
@@ -249,13 +266,16 @@
 				974FD9AD239194B60084900E /* DetailViewController.swift in Sources */,
 				974FD9BA23919D940084900E /* RepositoriesModel.swift in Sources */,
 				97611053239980ED0089B128 /* LoadingViewController.swift in Sources */,
+				97611067239C42660089B128 /* FirstCoordinator.swift in Sources */,
 				974FD9B2239195440084900E /* RootRepositoriesCoordinator.swift in Sources */,
+				97611065239C41FA0089B128 /* Coordinators.swift in Sources */,
 				974FD9C72391A5330084900E /* ReusableView.swift in Sources */,
 				974FD9AF239194D60084900E /* SegmentedViewController.swift in Sources */,
 				97611055239988C70089B128 /* UIButton.swift in Sources */,
 				974FD9B723919B2F0084900E /* GithubResourses.swift in Sources */,
 				97610FEF239266060089B128 /* LoginViewCoordinator.swift in Sources */,
 				97610FED2392619B0089B128 /* OfflineProvider.swift in Sources */,
+				97611061239C1AB90089B128 /* SingUpViewController.swift in Sources */,
 				974FD9C32391A3BA0084900E /* UIViewController+Anchors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -391,7 +411,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = vldn.Git4IOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -409,7 +429,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = vldn.Git4IOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

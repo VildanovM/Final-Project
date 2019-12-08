@@ -33,7 +33,6 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setViews()
         setStackView()
         setInfoStackView()
@@ -132,12 +131,17 @@ class DetailViewController: UIViewController {
     private func setButtonOnStack() {
         buttonPushToGithub.translatesAutoresizingMaskIntoConstraints = false
         buttonPushToGithub.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.1).isActive = true
+        
     }
     
     
     @objc private func goToGithub() {
         
         buttonPushToGithub.pulsate()
+        UIView.animate(withDuration: 0.3) {
+            self.buttonPushToGithub.backgroundColor = .gray
+            self.buttonPushToGithub.backgroundColor = .blue
+        }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.navigationRoot.goToGithub(url: self.url)
         }

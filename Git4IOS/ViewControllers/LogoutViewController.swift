@@ -11,50 +11,45 @@ import UIKit
 class LogoutViewController: UIViewController {
     
     private let logoutButton = UIButton()
-    private let containerView = UIView()
-    private let stackView = UIStackView()
-    private let topStackView = UIStackView()
+    private let navigationRoot = RootRepositoriesCoordinator()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        topStackView.axis = .vertical
-        topStackView.alignment = .center
-        topStackView.distribution = .equalSpacing
-        topStackView.isLayoutMarginsRelativeArrangement = true
-        topStackView.preservesSuperviewLayoutMargins = true
-        
-
-
         view.backgroundColor = .white
-        stackView.axis = .vertical
-        stackView.distribution = .fill
-        stackView.alignment = .fill
-        stackView.spacing = 5
-        logoutButton.backgroundColor = .gray
-        logoutButton.setTitle("Logout", for: .normal)
-        
-        view.addSubview(stackView)
-        view.anchor(view: stackView, useSafeAnchors: false)
-        
-        stackView.addArrangedSubview(topStackView)
-        topStackView.addArrangedSubview(logoutButton)
-        stackView.addArrangedSubview(containerView)
-        
-        
-        
+        setLogoutButton()
+        setConstraintLogoutButton()
         
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setLogoutButton() {
+        logoutButton.setTitle("Logout", for: .normal)
+        logoutButton.backgroundColor = .blue
+        logoutButton.layer.cornerRadius = 10
+        logoutButton.addTarget(self, action: #selector(pushToSingInViewController), for: .touchUpInside)
+        view.addSubview(logoutButton)
     }
-    */
+    
+    private func setConstraintLogoutButton() {
+        logoutButton.translatesAutoresizingMaskIntoConstraints = false
+        logoutButton.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
+        logoutButton.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        logoutButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
+        logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
+        logoutButton.heightAnchor.constraint(lessThanOrEqualToConstant: 100).isActive = true
+        
+    }
+    
+    @objc private func pushToSingInViewController() {
+        logoutButton.pulsate()
+        UIView.animate(withDuration: 0.3) {
+            self.logoutButton.backgroundColor = .gray
+            self.logoutButton.backgroundColor = .blue
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            
+        }
+        
+    }
 
 }

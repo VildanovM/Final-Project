@@ -62,7 +62,9 @@ class SegmentedViewController: UIViewController {
         topStackView.addArrangedSubview(segmentedControl)
         stackView.addArrangedSubview(containerView)
 
-        segmentedControl.addTarget(self, action: #selector(segmentDidChange(segment:)), for: .valueChanged)    }
+        segmentedControl.addTarget(self, action: #selector(segmentDidChange(segment:)), for: .valueChanged)
+        
+    }
     
 
     // MARK: - Actions

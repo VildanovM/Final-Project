@@ -9,10 +9,13 @@
 import UIKit
 
 class LoginViewCoordinator: UIViewController {
-
+    
+    private let singInViewController = SingInViewController()
+    private let singUpViewController = SingUpViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
     
     
