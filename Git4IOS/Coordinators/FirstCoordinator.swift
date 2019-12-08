@@ -27,6 +27,7 @@ class FirstCoordinator: Coordinator {
 }
 
 extension FirstCoordinator: FirstViewControllerDelegate {
+    
 
     // Navigate to next page
     func navigateToNextPage() {
@@ -35,12 +36,27 @@ extension FirstCoordinator: FirstViewControllerDelegate {
        childCoordinators.append(secondCoordinator)
        secondCoordinator.start()
     }
+    
+    func navigateToSingUpPage() {
+        let thirdCoordinator = ThirdCoordinator(navigationController: navigationController)
+        thirdCoordinator.delegate = self
+        childCoordinators.append(thirdCoordinator)
+        thirdCoordinator.start()
+    }
+    
 }
 
 extension FirstCoordinator: BackToFirstViewControllerDelegate {
     
     // Back from third page
     func navigateBackToFirstPage(newOrderCoordinator: SecondCoordinator) {
+        navigationController.popToRootViewController(animated: true)
+        childCoordinators.removeLast()
+    }
+}
+
+extension FirstCoordinator: BackToSingInControllerDelegate {
+    func navigateBackToFirstPage(newOrderCoordinator: ThirdCoordinator) {
         navigationController.popToRootViewController(animated: true)
         childCoordinators.removeLast()
     }

@@ -10,6 +10,7 @@ import UIKit
 
 public protocol FirstViewControllerDelegate: class {
     func navigateToNextPage()
+    func navigateToSingUpPage()
 }
 
 class SingInViewController: UIViewController, UITextFieldDelegate {
@@ -49,6 +50,7 @@ class SingInViewController: UIViewController, UITextFieldDelegate {
         UIView.animate(withDuration: 1, animations: {
             self.loginMessageLabel.alpha = 1
         })
+        navigationController?.isNavigationBarHidden = true
     }
     
     // MARK: - Private function
@@ -133,8 +135,7 @@ class SingInViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func singUpAction() {
-        
-        
+        self.delegate?.navigateToSingUpPage()
     }
     
     // MARK: - TextFieldDelegate 

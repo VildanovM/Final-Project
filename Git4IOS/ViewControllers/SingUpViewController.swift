@@ -8,11 +8,13 @@
 
 import UIKit
 
-
+public protocol ThirdCoordinatorDelegate: class {
+    func navigateToFirstPage()
+}
 
 class SingUpViewController: UIViewController, UITextFieldDelegate {
     
-    public weak var delegate: SecondViewControllerDelegate?
+    public weak var delegate: ThirdCoordinatorDelegate?
     
     // MARK: - Private variables
     private let loginMessageLabel = UILabel()
@@ -28,7 +30,7 @@ class SingUpViewController: UIViewController, UITextFieldDelegate {
         
         super.viewDidLoad()
         view.backgroundColor = .white
-        
+        title = "Registration"
         emailTextField.delegate = self
         passwordTextField.delegate = self
         confirmPasswordTextField.delegate = self
@@ -40,6 +42,22 @@ class SingUpViewController: UIViewController, UITextFieldDelegate {
         setRegistrationMessageLabel()
         setConstraintsAndAddSubview()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loginMessageLabel.alpha = 0
+        UIView.animate(withDuration: 1, animations: {
+            self.loginMessageLabel.alpha = 1
+        })
+        navigationController?.isNavigationBarHidden = false
+        
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.isNavigationBarHidden = true
     }
     
     // MARK: - Private function
@@ -129,11 +147,12 @@ class SingUpViewController: UIViewController, UITextFieldDelegate {
     
     private func createSuccessLoginAndPassword() {
         
-        let alertController = UIAlertController(title: "Success", message: "You created an account", preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: "Success", message: "You created an account", preferredStyle: .alert)
         
-        let allertAction = UIAlertAction(title: "Ok", style: .cancel) {
+        let allertAction = UIAlertAction(title: "Ok", style: .cancel) { [weak self]
             (allert) in
-            self.dismiss(animated: true, completion: nil)
+            guard let self = self else { return }
+            self.delegate?.navigateToFirstPage()
         }
         alertController.addAction(allertAction)
         self.present(alertController, animated: true, completion: nil)
@@ -148,8 +167,14 @@ class SingUpViewController: UIViewController, UITextFieldDelegate {
             if !password.isEmpty && !confirmPassword.isEmpty && !email.isEmpty {
                 
                 if password == confirmPassword {
-                    
-                    createSuccessLoginAndPassword()
+                    singUpButton.pulsate()
+                    UIView.animate(withDuration: 0.3) {
+                        self.singUpButton.backgroundColor = .gray
+                        self.singUpButton.backgroundColor = .blue
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        self.createSuccessLoginAndPassword()
+                    }
                     
                 } else {
                     createAlertInvalidLoginOrPassword(messageText: "Invalid password")

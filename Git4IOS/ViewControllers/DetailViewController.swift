@@ -54,10 +54,10 @@ class DetailViewController: UIViewController {
         view.backgroundColor = .white
         self.title = titleRepositories
         
-        buttonPushToGithub.setTitle("Go To GitHub", for: .normal)
+        buttonPushToGithub.setTitle("Go To Repository", for: .normal)
         buttonPushToGithub.backgroundColor = .blue
         buttonPushToGithub.layer.cornerRadius = 10
-        buttonPushToGithub.addTarget(self, action: #selector(goToGithub), for: .touchUpInside)
+        buttonPushToGithub.addTarget(self, action: #selector(goToRepository), for: .touchUpInside)
         
         descriptionRepository.numberOfLines = 0
         descriptionRepository.font = UIFont.systemFont(ofSize: 20)
@@ -135,7 +135,7 @@ class DetailViewController: UIViewController {
     }
     
     
-    @objc private func goToGithub() {
+    @objc private func goToRepository() {
         
         buttonPushToGithub.pulsate()
         UIView.animate(withDuration: 0.3) {
@@ -143,7 +143,7 @@ class DetailViewController: UIViewController {
             self.buttonPushToGithub.backgroundColor = .blue
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self.navigationRoot.goToGithub(url: self.url)
+            self.navigationRoot.goToRepository(url: self.url)
         }
         
     }

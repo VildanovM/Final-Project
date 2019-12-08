@@ -21,7 +21,7 @@ class RootRepositoriesCoordinator: UIViewController, UINavigationControllerDeleg
     private let swiftRepositoriesViewCoordinator = RepositoriesViewCoordinator()
     private let objectiveCRepositoriesViewCoordinator = RepositoriesViewCoordinator()
     private lazy var tabbarController = UITabBarController()
-    private lazy var navController = UINavigationController(rootViewController: tabbarController)
+    private lazy var navController = UINavigationController(rootViewController: segmentedViewController)
     
 
     
@@ -31,27 +31,32 @@ class RootRepositoriesCoordinator: UIViewController, UINavigationControllerDeleg
         swiftRepositoriesViewCoordinator.repositoriesType = .swift
         objectiveCRepositoriesViewCoordinator.repositoriesType = .objectiveC
         tabbarController.delegate = self
-        tabbarController.viewControllers = [segmentedViewController, LogoutViewController()]
+        let gitHubViewController = GithubViewController()
+        let logoutViewController = LogoutViewController()
         
-        add(asChildViewController: navController)
+        let imageRepository = UIImage(named: "1")
+        let imageGithub = UIImage(named: "2")
+        let imageQuit = UIImage(named: "3")
+        
+        let listTabBarItem = UITabBarItem(title: "Repositories", image: imageRepository, tag: 0)
+        let githubTabBarItem = UITabBarItem(title: "Go To Github", image: imageGithub, tag: 1)
+        let quitTabBarItem = UITabBarItem(title: "Quit", image: imageQuit, tag: 2)
+
+        segmentedViewController.tabBarItem = listTabBarItem
+        gitHubViewController.tabBarItem = githubTabBarItem
+        logoutViewController.tabBarItem = quitTabBarItem
+        
+        tabbarController.viewControllers = [navController, gitHubViewController, logoutViewController]
+        
+        add(asChildViewController: tabbarController)
         segmentedViewController.items = [swiftRepositoriesViewCoordinator, objectiveCRepositoriesViewCoordinator]
     
     }
     
-    public func goToGithub(url:String) {
+    public func goToRepository(url:String) {
         UIApplication.shared.open(URL(string: url)! as URL, options: [:], completionHandler: nil)
     }
     
-//    public func presentToSingUpViewController() {
-//        let singUpViewController = SingUpViewController()
-//        present(singUpViewController, animated: true, completion: nil)
-//    }
-    
-    
-    public func pushToLogout() {
-        let logoutViewController = LogoutViewController()
-        navController.pushViewController(logoutViewController, animated: true)
-    }
     
     // MARK: - UINavigationControllerDelegate
     
@@ -63,16 +68,11 @@ class RootRepositoriesCoordinator: UIViewController, UINavigationControllerDeleg
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         let selectedIndex = tabBarController.viewControllers?.firstIndex(of: viewController)!
-        if selectedIndex == 1 {
+        if selectedIndex == 2 {
             self.delegate?.navigateToThirdPage()
             return false
         }
         return true
     }
     
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        
-        
-        
-    }
 }
