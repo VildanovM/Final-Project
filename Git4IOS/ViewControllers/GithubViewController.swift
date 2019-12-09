@@ -8,8 +8,9 @@
 
 import UIKit
 
-class GithubViewController: UIViewController {
+final class GithubViewController: UIViewController {
     
+    // MARK: - Private variables
     private let mainStackView = UIStackView()
     private let githubCatImage = UIImageView()
     private let goToGithubButton = UIButton()
@@ -28,7 +29,7 @@ class GithubViewController: UIViewController {
 
     private func setGithubCatImage() {
         githubCatImage.image = UIImage(named: "0ba2aa20e2c2ce80e9a2db5b07198464")
-        githubCatImage.contentMode = .scaleAspectFill
+        githubCatImage.contentMode = .scaleAspectFit
        
     }
     
@@ -42,8 +43,7 @@ class GithubViewController: UIViewController {
     
     private func setMainStackView() {
         mainStackView.axis = .vertical
-        mainStackView.distribution = .equalSpacing
-        mainStackView.spacing = 100
+        mainStackView.distribution = .fill
         mainStackView.isLayoutMarginsRelativeArrangement = true
         mainStackView.preservesSuperviewLayoutMargins = true
         view.addSubview(mainStackView)
@@ -51,21 +51,24 @@ class GithubViewController: UIViewController {
     
     private func setLogoutStackViewConstraint() {
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
-        mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 170).isActive = true
-        mainStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -150).isActive = true
+        mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 200).isActive = true
+        mainStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -200).isActive = true
         mainStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
         mainStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
         
         mainStackView.addArrangedSubview(githubCatImage)
         mainStackView.addArrangedSubview(goToGithubButton)
         
+        
         goToGithubButton.translatesAutoresizingMaskIntoConstraints = false
-        goToGithubButton.heightAnchor.constraint(equalTo: mainStackView.heightAnchor, multiplier: 0.13).isActive = true
+        goToGithubButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        goToGithubButton.bottomAnchor.constraint(equalTo: mainStackView.bottomAnchor).isActive = true
     }
     
     @objc private func pushToSingInViewController() {
         goToGithubButton.pulsate()
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            guard let self = self else {return}
             self.goToGithubButton.backgroundColor = .gray
             self.goToGithubButton.backgroundColor = .blue
         }

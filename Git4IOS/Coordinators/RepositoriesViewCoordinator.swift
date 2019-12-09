@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RepositoriesViewCoordinator: UIViewController, UITableViewDelegate {
+final class RepositoriesViewCoordinator: UIViewController, UITableViewDelegate {
     
     // MARK: - Public Variables
     public var repositoriesType: RepositoriesType = .swift {

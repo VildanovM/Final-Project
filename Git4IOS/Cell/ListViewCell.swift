@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListViewCell: UITableViewCell {
+final class ListViewCell: UITableViewCell {
     
     // MARK: - Public variables
     public static let reuseID = "ReuseId"

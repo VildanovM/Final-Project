@@ -93,10 +93,10 @@ public extension UIView {
         centerXAnchor.constraint(equalTo: aboveView.centerXAnchor).isActive = true
         
         if let someSuperview = superview {
+            
             leadingAnchor.constraint(greaterThanOrEqualTo: someSuperview.layoutMarginsGuide.leadingAnchor).isActive = true
             trailingAnchor.constraint(lessThanOrEqualTo: someSuperview.layoutMarginsGuide.trailingAnchor).isActive = true
             
-            // leadingAnchor.constraint(greaterThanOrEqualTo: someSuperview.layoutMarginsGuide.leadingAnchor, constant: 8.0).isActive = true
         }
     }
     
@@ -105,7 +105,7 @@ public extension UIView {
         
         for anchoredView in anchoredViews {
             anchoredView.translatesAutoresizingMaskIntoConstraints = false
-            // Si c'est la premiere vue on l'ancre en haut de l'ecran, sinon au bas de la vue précédente
+            
             if previousAnchoredView == nil {
                 anchoredView.topAnchor.constraint(equalTo: topAnchor).isActive = true
             } else {
@@ -115,7 +115,6 @@ public extension UIView {
             anchoredView.leadingAnchor.constraint(equalTo: safeLeadingAnchor).isActive = true
             anchoredView.trailingAnchor.constraint(equalTo: safeTrailingAnchor).isActive = true
             
-            // Si c'est la derniere vue on l'ancre en bas de l'ecran
             if anchoredViews.last! == anchoredView {
                 anchoredView.bottomAnchor.constraint(equalTo: safeBottomAnchor).isActive = true
             }

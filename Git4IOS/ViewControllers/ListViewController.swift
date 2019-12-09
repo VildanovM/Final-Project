@@ -8,10 +8,10 @@
 
 import UIKit
 
-class ListViewController: UITableViewController {
+final class ListViewController: UITableViewController {
 
-    let githubResourse = RepositoriesType.swift
-    var jsonModel: Model? {
+    // MARK: - Public variables
+    public var jsonModel: Model? {
         didSet {
             tableView.reloadData()
         }

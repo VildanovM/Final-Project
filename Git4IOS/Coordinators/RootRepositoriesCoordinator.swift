@@ -8,14 +8,15 @@
 
 import UIKit
 
-public protocol SecondViewControllerDelegate: class {
+public protocol TabBarCoordinatorDelegate: class {
     func navigateToFirstPage()
     func navigateToThirdPage()
 }
 
-class RootRepositoriesCoordinator: UIViewController, UINavigationControllerDelegate, UITabBarControllerDelegate {
+final class RootRepositoriesCoordinator: UIViewController, UINavigationControllerDelegate, UITabBarControllerDelegate {
     
-    public weak var delegate: SecondViewControllerDelegate?
+    // MARK: - Public variables
+    public weak var delegate: TabBarCoordinatorDelegate?
     // MARK: - Private variables
     private let segmentedViewController = SegmentedViewController()
     private let swiftRepositoriesViewCoordinator = RepositoriesViewCoordinator()

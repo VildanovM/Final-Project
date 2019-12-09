@@ -7,15 +7,16 @@
 //
 
 import UIKit
+import FirebaseAuth
 
-public protocol ThirdCoordinatorDelegate: class {
+public protocol SingUpCoordinatorDelegate: class {
     func navigateToFirstPage()
 }
 
-class SingUpViewController: UIViewController, UITextFieldDelegate {
+final class SingUpViewController: UIViewController, UITextFieldDelegate {
     
-    public weak var delegate: ThirdCoordinatorDelegate?
-    
+    // MARK: - Public variables
+    public weak var delegate: SingUpCoordinator?
     // MARK: - Private variables
     private let loginMessageLabel = UILabel()
     private let emailTextField = UITextField()
@@ -47,11 +48,13 @@ class SingUpViewController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loginMessageLabel.alpha = 0
-        UIView.animate(withDuration: 1, animations: {
+        UIView.animate(withDuration: 1, animations: { [weak self] in
+            guard let self = self else {return}
             self.loginMessageLabel.alpha = 1
         })
         navigationController?.isNavigationBarHidden = false
         
+
         
     }
     
@@ -82,6 +85,8 @@ class SingUpViewController: UIViewController, UITextFieldDelegate {
         emailTextField.autocorrectionType = .no
         passwordTextField.autocorrectionType = .no
         confirmPasswordTextField.autocorrectionType = .no
+        passwordTextField.isSecureTextEntry = true
+        confirmPasswordTextField.isSecureTextEntry = true
         
     }
     
@@ -138,7 +143,6 @@ class SingUpViewController: UIViewController, UITextFieldDelegate {
     private func createAlertInvalidLoginOrPassword(messageText: String) {
         
         let alertController = UIAlertController(title: "Error", message: messageText, preferredStyle: .alert)
-        
         let allertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(allertAction)
         self.present(alertController, animated: true, completion: nil)
@@ -152,6 +156,7 @@ class SingUpViewController: UIViewController, UITextFieldDelegate {
         let allertAction = UIAlertAction(title: "Ok", style: .cancel) { [weak self]
             (allert) in
             guard let self = self else { return }
+            self.createAUser()
             self.delegate?.navigateToFirstPage()
         }
         alertController.addAction(allertAction)
@@ -160,31 +165,65 @@ class SingUpViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    @objc private func singUpAction() {
+    private func createAUser() {
         
-        if let password = passwordTextField.text, let confirmPassword = confirmPasswordTextField.text, let email = emailTextField.text {
+        guard let email = emailTextField.text, let password = passwordTextField.text else { return }
+        
+        Auth.auth().createUser(withEmail: email, password: password)
+    }
+    
+    private func validateFields() -> String? {
+        if emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || confirmPasswordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
             
-            if !password.isEmpty && !confirmPassword.isEmpty && !email.isEmpty {
-                
-                if password == confirmPassword {
-                    singUpButton.pulsate()
-                    UIView.animate(withDuration: 0.3) {
+            return "Please fill in all fields."
+        }
+        
+        if passwordTextField.text != confirmPasswordTextField.text {
+            return "Your confirmation password does not math the password"
+        }
+        
+        let cleanedPassword = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if Utilities.isPasswordValid(cleanedPassword) == false {
+            return "Please make sure your password is at least 8 characters, contains a special character and a number."
+        }
+        
+        return nil
+    }
+    
+    @objc private func singUpAction() {
+    
+        [emailTextField, passwordTextField, confirmPasswordTextField].forEach {
+            $0.resignFirstResponder()
+        }
+        let error = validateFields()
+        
+        if let error = error {
+            createAlertInvalidLoginOrPassword(messageText: error)
+        }
+            
+        else {
+            let email = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let password = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            Auth.auth().createUser(withEmail: email, password: password) { [weak self] (result, errorAuthentification) in
+                guard let self = self else { return }
+                if errorAuthentification != nil {
+                    self.createAlertInvalidLoginOrPassword(messageText: "Error creating user")
+                }
+                else {
+                    self.singUpButton.pulsate()
+                    UIView.animate(withDuration: 0.3) { [weak self] in
+                        guard let self = self else {return}
                         self.singUpButton.backgroundColor = .gray
                         self.singUpButton.backgroundColor = .blue
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         self.createSuccessLoginAndPassword()
                     }
-                    
-                } else {
-                    createAlertInvalidLoginOrPassword(messageText: "Invalid password")
+
                 }
-                
-            } else {
-                createAlertInvalidLoginOrPassword(messageText: "Invalid email or password")
             }
         }
-        
     }
     
     

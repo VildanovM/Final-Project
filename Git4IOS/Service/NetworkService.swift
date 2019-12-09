@@ -8,7 +8,7 @@
 
 import Foundation
 
-class NetworkService {
+final class NetworkService {
     
     public static func get(url: String, _ complition: @escaping (Model?) -> ()) {
         

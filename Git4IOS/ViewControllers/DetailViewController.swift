@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+final class DetailViewController: UIViewController {
     
     // MARK: - Public variables
     public var descriptionRepository = UILabel()
@@ -43,7 +43,8 @@ class DetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         descriptionRepository.alpha = 0
-        UIView.animate(withDuration: 1, animations: {
+        UIView.animate(withDuration: 1, animations: { [weak self] in
+        guard let self = self else {return}
             self.descriptionRepository.alpha = 1
         })
     }
@@ -138,7 +139,8 @@ class DetailViewController: UIViewController {
     @objc private func goToRepository() {
         
         buttonPushToGithub.pulsate()
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            guard let self = self else {return}
             self.buttonPushToGithub.backgroundColor = .gray
             self.buttonPushToGithub.backgroundColor = .blue
         }

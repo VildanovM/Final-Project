@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension UIButton {
+public extension UIButton {
     
     func pulsate() {
         let pulse = CASpringAnimation(keyPath: "transform.scale")

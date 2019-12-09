@@ -8,10 +8,9 @@
 
 import UIKit
 
-class SegmentedViewController: UIViewController {
+final class SegmentedViewController: UIViewController {
     
     // MARK: - Public variables
-    
     public var items = [UIViewController]() {
         didSet {
             // Remove previous viewControllers

@@ -8,10 +8,9 @@
 
 import UIKit
 
-class LoadingViewController: UIViewController {
+final class LoadingViewController: UIViewController {
     
-    // MARK: - Variables
-    
+    // MARK: - Private variables
     private let contentViewController: UIViewController
     private let activityIndicator = UIActivityIndicatorView(style: .large)
     private let blueView = UIView()

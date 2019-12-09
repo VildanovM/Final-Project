@@ -7,13 +7,16 @@
 //
 
 import UIKit
+import FirebaseAuth
 
-class LogoutViewController: UIViewController {
+final class LogoutViewController: UIViewController {
     
+    // MARK: - Public variables
+    public weak var delegate: TabBarCoordinatorDelegate?
+    // MARK: - Private variables
     private let logoutButton = UIButton()
     private let logoutLabel = UILabel()
     private let logoutStackView = UIStackView()
-    public weak var delegate: SecondViewControllerDelegate?
     
 
     override func viewDidLoad() {
@@ -29,7 +32,8 @@ class LogoutViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         logoutLabel.alpha = 0
-        UIView.animate(withDuration: 1, animations: {
+        UIView.animate(withDuration: 1, animations: { [weak self] in
+            guard let self = self else {return}
             self.logoutLabel.alpha = 1
         })
         navigationController?.isNavigationBarHidden = false
@@ -58,7 +62,7 @@ class LogoutViewController: UIViewController {
     
     private func setLogoutStackView() {
         logoutStackView.axis = .vertical
-        logoutStackView.distribution = .equalSpacing
+        logoutStackView.distribution = .fill
         logoutStackView.isLayoutMarginsRelativeArrangement = true
         logoutStackView.preservesSuperviewLayoutMargins = true
         view.addSubview(logoutStackView)
@@ -70,18 +74,39 @@ class LogoutViewController: UIViewController {
         logoutStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -200).isActive = true
         logoutStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
         logoutStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30).isActive = true
-        
         logoutStackView.addArrangedSubview(logoutLabel)
         logoutStackView.addArrangedSubview(logoutButton)
+        
+        logoutButton.translatesAutoresizingMaskIntoConstraints = false
+        logoutButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        logoutButton.bottomAnchor.constraint(equalTo: logoutStackView.bottomAnchor).isActive = true
+        
+        
     }
+    
+    private func createAlertInvalidLogout(messageText: String) {
+         
+         let alertController = UIAlertController(title: "Error", message: messageText, preferredStyle: .alert)
+         
+         let allertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+         alertController.addAction(allertAction)
+         self.present(alertController, animated: true, completion: nil)
+         
+     }
     
     @objc private func pushToSingInViewController() {
         logoutButton.pulsate()
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            guard let self = self else {return}
             self.logoutButton.backgroundColor = .gray
             self.logoutButton.backgroundColor = .blue
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            do {
+                try Auth.auth().signOut()
+            } catch let logoutError {
+                self.createAlertInvalidLogout(messageText: logoutError.localizedDescription)
+            }
             self.delegate?.navigateToFirstPage()
         }
         

@@ -8,13 +8,8 @@
 
 import UIKit
 
-/// Extension to simplify autolayout anchoring of views in a ViewController
 public extension UIViewController {
-    /// Adds a view as a subview to the main view
-    ///
-    /// - Parameters:
-    ///   - anchoredView: the view to anchor
-    ///   - useSafeAnchor: should the view be anchored to the safeAreaLayoutGuide
+    
     func anchor(view anchoredView: UIView, useSafeAnchors: Bool = true) {
         anchoredView.translatesAutoresizingMaskIntoConstraints = false
         if #available(iOS 11, *) {
@@ -32,17 +27,12 @@ public extension UIViewController {
         }
     }
     
-    /// Adds multiple views as subviews to the main view
-    ///
-    /// - Parameters:
-    ///   - anchoredViews: an array of UIViews to anchor vertically
     func anchor(views anchoredViews: [UIView], useSafeAnchors: Bool = true) {
         var previousAnchoredView: UIView?
         
         for anchoredView in anchoredViews {
             anchoredView.translatesAutoresizingMaskIntoConstraints = false
             
-            // Si c'est la premiere vue on l'ancre en haut de l'ecran, sinon au bas de la vue précédente
             if previousAnchoredView == nil {
                 anchoredView.topAnchor.constraint(equalTo: useSafeAnchors ? view.safeTopAnchor : view.safeAreaLayoutGuide.bottomAnchor).isActive = true
             } else {
@@ -52,7 +42,6 @@ public extension UIViewController {
             anchoredView.leadingAnchor.constraint(equalTo: useSafeAnchors ? view.safeLeadingAnchor : view.leadingAnchor).isActive = true
             anchoredView.trailingAnchor.constraint(equalTo: useSafeAnchors ? view.safeTrailingAnchor : view.trailingAnchor).isActive = true
             
-            // Si c'est la derniere vue on l'ancre en bas de l'ecran
             if anchoredViews.last! == anchoredView {
                 anchoredView.bottomAnchor.constraint(equalTo: useSafeAnchors ? view.safeBottomAnchor : view.safeAreaLayoutGuide.topAnchor).isActive = true
             }

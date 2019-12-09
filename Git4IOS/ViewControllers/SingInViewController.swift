@@ -7,14 +7,17 @@
 //
 
 import UIKit
+import FirebaseAuth
 
-public protocol FirstViewControllerDelegate: class {
+public protocol SingInControllerDelegate: class {
     func navigateToNextPage()
     func navigateToSingUpPage()
 }
 
-class SingInViewController: UIViewController, UITextFieldDelegate {
+final class SingInViewController: UIViewController, UITextFieldDelegate {
     
+    // MARK: - Public variables
+    public weak var delegate: SingInControllerDelegate?
     // MARK: - Private variables
     private let loginMessageLabel = UILabel()
     private let emailTextField = UITextField()
@@ -24,8 +27,6 @@ class SingInViewController: UIViewController, UITextFieldDelegate {
     private let emailAndPasswordStackView = UIStackView()
     private let singUpButton = UIButton()
     private let rootNavigation = RootRepositoriesCoordinator()
-    
-    public weak var delegate: FirstViewControllerDelegate?
     
     override func viewDidLoad() {
         
@@ -46,8 +47,17 @@ class SingInViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        emailTextField.text = ""
+        passwordTextField.text = ""
+        if (Auth.auth().currentUser?.uid) != nil  {
+            self.delegate?.navigateToNextPage()
+        }
+        
+        
         loginMessageLabel.alpha = 0
-        UIView.animate(withDuration: 1, animations: {
+        UIView.animate(withDuration: 1, animations: { [weak self] in
+            guard let self = self else {return}
             self.loginMessageLabel.alpha = 1
         })
         navigationController?.isNavigationBarHidden = true
@@ -70,6 +80,7 @@ class SingInViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.placeholder = "password"
         emailTextField.borderStyle = .bezel
         passwordTextField.borderStyle = .bezel
+        passwordTextField.isSecureTextEntry = true
         
         emailTextField.autocorrectionType = .no
         passwordTextField.autocorrectionType = .no
@@ -123,14 +134,43 @@ class SingInViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    private func singInUser() {
+        
+        if let email = emailTextField.text, let password = passwordTextField.text {
+            Auth.auth().signIn(withEmail: email.trimmingCharacters(in: .whitespacesAndNewlines), password: password.trimmingCharacters(in: .whitespacesAndNewlines)) { [weak self] (result, error) in
+                guard let self = self else { return }
+                if let error = error {
+                    self.createAlertInvalidLoginOrPassword(messageText: error.localizedDescription)
+                }
+                else {
+                    self.delegate?.navigateToNextPage()
+                }
+            }
+        }
+    }
+    
+    private func createAlertInvalidLoginOrPassword(messageText: String) {
+        
+        let alertController = UIAlertController(title: "Error", message: messageText, preferredStyle: .alert)
+        
+        let allertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(allertAction)
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
+    
     @objc private func singInAction() {
+        [emailTextField, passwordTextField].forEach {
+            $0.resignFirstResponder()
+        }
         singInButton.pulsate()
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            guard let self = self else {return}
             self.singInButton.backgroundColor = .gray
             self.singInButton.backgroundColor = .blue
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self.delegate?.navigateToNextPage()
+            self.singInUser()
         }
     }
     
