@@ -11,6 +11,7 @@ import FirebaseAuth
 
 public protocol SingUpCoordinatorDelegate: class {
     func navigateToFirstPage()
+    func allertPresent(allert: UIAlertController, viewController: UIViewController)
 }
 
 final class SingUpViewController: UIViewController, UITextFieldDelegate {
@@ -145,7 +146,7 @@ final class SingUpViewController: UIViewController, UITextFieldDelegate {
         let alertController = UIAlertController(title: "Error", message: messageText, preferredStyle: .alert)
         let allertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(allertAction)
-        self.present(alertController, animated: true, completion: nil)
+        self.delegate?.allertPresent(allert: alertController, viewController: self)
         
     }
     
@@ -160,7 +161,7 @@ final class SingUpViewController: UIViewController, UITextFieldDelegate {
             self.delegate?.navigateToFirstPage()
         }
         alertController.addAction(allertAction)
-        self.present(alertController, animated: true, completion: nil)
+        self.delegate?.allertPresent(allert: alertController, viewController: self)
         
     }
     

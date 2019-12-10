@@ -43,6 +43,10 @@ extension SingInCoordinator: SingInControllerDelegate {
         singUpCoordinator.start()
     }
     
+    func allertPresent(allert: UIAlertController, viewController: UIViewController) {
+        viewController.present(allert, animated: true, completion: nil)
+    }
+    
 }
 
 extension SingInCoordinator: BackToFirstViewControllerDelegate {

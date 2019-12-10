@@ -72,8 +72,8 @@ final class GithubViewController: UIViewController {
             self.goToGithubButton.backgroundColor = .gray
             self.goToGithubButton.backgroundColor = .blue
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self.navigationRoot.goToRepository(url: "https://github.com")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            self.navigationRoot.goToRepository(url: "https://github.com", viewController: self)
         }
         
     }

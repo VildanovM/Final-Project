@@ -145,7 +145,7 @@ final class DetailViewController: UIViewController {
             self.buttonPushToGithub.backgroundColor = .blue
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self.navigationRoot.goToRepository(url: self.url)
+            self.navigationRoot.goToRepository(url: self.url, viewController: self)
         }
         
     }

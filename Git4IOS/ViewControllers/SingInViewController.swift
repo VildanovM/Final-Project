@@ -12,6 +12,7 @@ import FirebaseAuth
 public protocol SingInControllerDelegate: class {
     func navigateToNextPage()
     func navigateToSingUpPage()
+    func allertPresent(allert: UIAlertController, viewController: UIViewController)
 }
 
 final class SingInViewController: UIViewController, UITextFieldDelegate {
@@ -155,7 +156,7 @@ final class SingInViewController: UIViewController, UITextFieldDelegate {
         
         let allertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(allertAction)
-        self.present(alertController, animated: true, completion: nil)
+        self.delegate?.allertPresent(allert: alertController, viewController: self)
         
     }
     

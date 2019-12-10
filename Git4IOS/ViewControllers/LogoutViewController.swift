@@ -81,7 +81,6 @@ final class LogoutViewController: UIViewController {
         logoutButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         logoutButton.bottomAnchor.constraint(equalTo: logoutStackView.bottomAnchor).isActive = true
         
-        
     }
     
     private func createAlertInvalidLogout(messageText: String) {

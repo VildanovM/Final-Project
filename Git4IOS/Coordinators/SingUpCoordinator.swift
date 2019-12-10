@@ -37,5 +37,9 @@ extension SingUpCoordinator : SingUpCoordinatorDelegate {
     func navigateToFirstPage() {
         self.delegate?.navigateBackToFirstPage(newOrderCoordinator: self)
     }
+    
+    func allertPresent(allert: UIAlertController, viewController: UIViewController) {
+        viewController.present(allert, animated: true, completion: nil)
+    }
 }
 

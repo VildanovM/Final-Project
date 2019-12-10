@@ -67,6 +67,12 @@ final class SegmentedViewController: UIViewController {
     
 
     // MARK: - Actions
+    private func selectController(at index: Int ) {
+        
+        let item = items[index]
+        
+        add(asChildViewController: item, anchored: true, subview: containerView)
+    }
     
     @objc
     private func segmentDidChange(segment: UISegmentedControl) {
@@ -74,12 +80,4 @@ final class SegmentedViewController: UIViewController {
         selectController(at: segment.selectedSegmentIndex)
     }
     
-    private func selectController(at index: Int ) {
-        
-        let item = items[index]
-        
-        add(asChildViewController: item, anchored: true, subview: containerView)
-    }
-
-
 }

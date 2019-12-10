@@ -122,7 +122,7 @@
 				972C3E362386D32100189EF0 /* AppDelegate.swift */,
 				972C3E382386D32100189EF0 /* SceneDelegate.swift */,
 				97610FEC2392619B0089B128 /* OfflineProvider.swift */,
-				97B3512D239E586B00E9A079 /* Utilities.swift */,
+				97611051239958B50089B128 /* Helpers */,
 				9761104A2396D5D70089B128 /* Service */,
 				974FD9C82391A5550084900E /* Extension */,
 				974FD9B823919D790084900E /* Model */,
@@ -197,17 +197,17 @@
 			isa = PBXGroup;
 			children = (
 				976110482396D3880089B128 /* NetworkService.swift */,
-				97611051239958B50089B128 /* Service Helper */,
 			);
 			path = Service;
 			sourceTree = "<group>";
 		};
-		97611051239958B50089B128 /* Service Helper */ = {
+		97611051239958B50089B128 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				97B3512D239E586B00E9A079 /* Utilities.swift */,
 				974FD9B623919B2F0084900E /* GithubResourses.swift */,
 			);
-			path = "Service Helper";
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		F3AB5720F9E6FF453A31E55B /* Pods */ = {

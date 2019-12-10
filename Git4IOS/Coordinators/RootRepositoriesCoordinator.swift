@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 public protocol TabBarCoordinatorDelegate: class {
     func navigateToFirstPage()
@@ -54,8 +55,11 @@ final class RootRepositoriesCoordinator: UIViewController, UINavigationControlle
     
     }
     
-    public func goToRepository(url:String) {
-        UIApplication.shared.open(URL(string: url)! as URL, options: [:], completionHandler: nil)
+    public func goToRepository(url:String, viewController: UIViewController) {
+        if let url = URL(string: url) {
+            let safariViewController = SFSafariViewController(url: url)
+            viewController.present(safariViewController, animated: true, completion: nil)
+        }
     }
     
     
