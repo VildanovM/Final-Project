@@ -57,6 +57,6 @@ final class LoadingViewController: UIViewController {
         activityIndicator.stopAnimating()
         contentViewController.view.isHidden = false
     }
-
-
+    
+    
 }

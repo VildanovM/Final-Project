@@ -18,15 +18,15 @@ final class SingUpViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Public variables
     public weak var delegate: SingUpCoordinator?
+    public let loginMessageLabel = UILabel()
+    public let emailTextField = UITextField()
+    public let passwordTextField = UITextField()
+    public let singUpButton = UIButton()
+    public let privacyPolicyLabel = UILabel()
+    public let confirmPasswordTextField = UITextField()
     // MARK: - Private variables
-    private let loginMessageLabel = UILabel()
-    private let emailTextField = UITextField()
-    private let passwordTextField = UITextField()
-    private let confirmPasswordTextField = UITextField()
-    private let singUpButton = UIButton()
     private let mainStackView = UIStackView()
     private let emailAndPasswordStackView = UIStackView()
-    private let privacyPolicyLabel = UILabel()
     
     override func viewDidLoad() {
         
@@ -55,7 +55,7 @@ final class SingUpViewController: UIViewController, UITextFieldDelegate {
         })
         navigationController?.isNavigationBarHidden = false
         
-
+        
         
     }
     
@@ -64,18 +64,24 @@ final class SingUpViewController: UIViewController, UITextFieldDelegate {
         navigationController?.isNavigationBarHidden = true
     }
     
-    // MARK: - Private function
-    private func setMainStackView() {
+    
+    
+    // MARK: - Public function
+    public func setRegistrationMessageLabel() {
         
-        mainStackView.axis = .vertical
-        mainStackView.distribution = .equalSpacing
-        mainStackView.isLayoutMarginsRelativeArrangement = true
-        mainStackView.preservesSuperviewLayoutMargins = true
-        view.addSubview(mainStackView)
+        loginMessageLabel.text = "Account Registration"
+        loginMessageLabel.numberOfLines = 0
+        loginMessageLabel.font = UIFont.boldSystemFont(ofSize: 30)
+        
+        privacyPolicyLabel.text = "By signing up, you agree to the Privacy Policy"
+        privacyPolicyLabel.numberOfLines = 0
+        privacyPolicyLabel.textAlignment = .center
+        privacyPolicyLabel.textColor = .gray
+        
         
     }
     
-    private func setEmailAndPassword() {
+    public func setEmailAndPassword() {
         
         emailTextField.placeholder = "email"
         passwordTextField.placeholder = "password"
@@ -91,6 +97,45 @@ final class SingUpViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    public func setButtons() {
+        
+        singUpButton.setTitle("Sing Up", for: .normal)
+        singUpButton.backgroundColor = .blue
+        singUpButton.layer.cornerRadius = 10
+        singUpButton.addTarget(self, action: #selector(singUpAction), for: .touchUpInside)
+        
+    }
+    
+    public func validateFields() -> String? {
+        if emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || confirmPasswordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            
+            return "Please fill in all fields."
+        }
+        
+        if passwordTextField.text != confirmPasswordTextField.text {
+            return "Your confirmation password does not math the password"
+        }
+        
+        let cleanedPassword = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if Utilities.isPasswordValid(cleanedPassword) == false {
+            return "Please make sure your password is at least 8 characters, contains a special character and a number."
+        }
+        
+        return nil
+    }
+    
+    // MARK: - Private function
+    private func setMainStackView() {
+        
+        mainStackView.axis = .vertical
+        mainStackView.distribution = .equalSpacing
+        mainStackView.isLayoutMarginsRelativeArrangement = true
+        mainStackView.preservesSuperviewLayoutMargins = true
+        view.addSubview(mainStackView)
+        
+    }
+    
     private func setEmailStackView() {
         
         emailAndPasswordStackView.axis = .vertical
@@ -100,29 +145,6 @@ final class SingUpViewController: UIViewController, UITextFieldDelegate {
         emailAndPasswordStackView.addArrangedSubview(emailTextField)
         emailAndPasswordStackView.addArrangedSubview(passwordTextField)
         emailAndPasswordStackView.addArrangedSubview(confirmPasswordTextField)
-        
-    }
-    
-    private func setButtons() {
-        
-        singUpButton.setTitle("Sing Up", for: .normal)
-        singUpButton.backgroundColor = .blue
-        singUpButton.layer.cornerRadius = 10
-        singUpButton.addTarget(self, action: #selector(singUpAction), for: .touchUpInside)
-        
-    }
-    
-    private func setRegistrationMessageLabel() {
-        
-        loginMessageLabel.text = "Account Registration"
-        loginMessageLabel.numberOfLines = 0
-        loginMessageLabel.font = UIFont.boldSystemFont(ofSize: 30)
-        
-        privacyPolicyLabel.text = "By signing up, you agree to the Privacy Policy"
-        privacyPolicyLabel.numberOfLines = 0
-        privacyPolicyLabel.textAlignment = .center
-        privacyPolicyLabel.textColor = .gray
-        
         
     }
     
@@ -141,7 +163,7 @@ final class SingUpViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    private func createAlertInvalidLoginOrPassword(messageText: String) {
+    private func createAlertInvalidLoginOrPassword(messageText: String?) {
         
         let alertController = UIAlertController(title: "Error", message: messageText, preferredStyle: .alert)
         let allertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -173,27 +195,8 @@ final class SingUpViewController: UIViewController, UITextFieldDelegate {
         Auth.auth().createUser(withEmail: email, password: password)
     }
     
-    private func validateFields() -> String? {
-        if emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || confirmPasswordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            
-            return "Please fill in all fields."
-        }
-        
-        if passwordTextField.text != confirmPasswordTextField.text {
-            return "Your confirmation password does not math the password"
-        }
-        
-        let cleanedPassword = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        
-        if Utilities.isPasswordValid(cleanedPassword) == false {
-            return "Please make sure your password is at least 8 characters, contains a special character and a number."
-        }
-        
-        return nil
-    }
-    
     @objc private func singUpAction() {
-    
+        
         [emailTextField, passwordTextField, confirmPasswordTextField].forEach {
             $0.resignFirstResponder()
         }
@@ -221,7 +224,7 @@ final class SingUpViewController: UIViewController, UITextFieldDelegate {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         self.createSuccessLoginAndPassword()
                     }
-
+                    
                 }
             }
         }

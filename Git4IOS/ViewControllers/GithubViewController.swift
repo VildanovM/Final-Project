@@ -10,12 +10,13 @@ import UIKit
 
 final class GithubViewController: UIViewController {
     
+    // MARK: - Public variables
+    public let githubCatImage = UIImageView()
+    public let goToGithubButton = UIButton()
     // MARK: - Private variables
     private let mainStackView = UIStackView()
-    private let githubCatImage = UIImageView()
-    private let goToGithubButton = UIButton()
     private let navigationRoot = RootRepositoriesCoordinator()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -26,15 +27,15 @@ final class GithubViewController: UIViewController {
         setLogoutStackViewConstraint()
     }
     
-
-    private func setGithubCatImage() {
+    
+    public func setGithubCatImage() {
         githubCatImage.image = UIImage(named: "0ba2aa20e2c2ce80e9a2db5b07198464")
         githubCatImage.contentMode = .scaleAspectFit
-       
+        
     }
     
-
-    private func setGithubButton() {
+    
+    public func setGithubButton() {
         goToGithubButton.setTitle("Go to Github", for: .normal)
         goToGithubButton.backgroundColor = .blue
         goToGithubButton.layer.cornerRadius = 10
@@ -77,6 +78,6 @@ final class GithubViewController: UIViewController {
         }
         
     }
-
-
+    
+    
 }

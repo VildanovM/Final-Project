@@ -19,14 +19,14 @@ final class SingInViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Public variables
     public weak var delegate: SingInControllerDelegate?
+    public let loginMessageLabel = UILabel()
+    public let emailTextField = UITextField()
+    public let passwordTextField = UITextField()
+    public let singInButton = UIButton()
+    public let singUpButton = UIButton()
     // MARK: - Private variables
-    private let loginMessageLabel = UILabel()
-    private let emailTextField = UITextField()
-    private let passwordTextField = UITextField()
-    private let singInButton = UIButton()
     private let mainStackView = UIStackView()
     private let emailAndPasswordStackView = UIStackView()
-    private let singUpButton = UIButton()
     private let rootNavigation = RootRepositoriesCoordinator()
     
     override func viewDidLoad() {
@@ -64,18 +64,29 @@ final class SingInViewController: UIViewController, UITextFieldDelegate {
         navigationController?.isNavigationBarHidden = true
     }
     
-    // MARK: - Private function
-    private func setMainStackView() {
+    public func setButtons() {
         
-        mainStackView.axis = .vertical
-        mainStackView.distribution = .equalSpacing
-        mainStackView.isLayoutMarginsRelativeArrangement = true
-        mainStackView.preservesSuperviewLayoutMargins = true
-        view.addSubview(mainStackView)
+        singInButton.setTitle("Sing In", for: .normal)
+        singInButton.backgroundColor = .blue
+        singInButton.layer.cornerRadius = 10
+        singInButton.addTarget(self, action: #selector(singInAction), for: .touchUpInside)
+        
+        singUpButton.setTitle("Sing Up", for: .normal)
+        singUpButton.setTitleColor(.blue, for: .normal)
+        singUpButton.addTarget(self, action: #selector(singUpAction), for: .touchUpInside)
         
     }
     
-    private func setEmailAndPassword() {
+    // MARK: - Private function
+    public func setLoginMessageLabel() {
+        
+        loginMessageLabel.text = "Login with Email Address"
+        loginMessageLabel.numberOfLines = 0
+        loginMessageLabel.font = UIFont.boldSystemFont(ofSize: 30)
+        
+    }
+    
+    public func setEmailAndPassword() {
         
         emailTextField.placeholder = "email"
         passwordTextField.placeholder = "password"
@@ -85,6 +96,17 @@ final class SingInViewController: UIViewController, UITextFieldDelegate {
         
         emailTextField.autocorrectionType = .no
         passwordTextField.autocorrectionType = .no
+        
+    }
+    
+    // MARK: - Private function
+    private func setMainStackView() {
+        
+        mainStackView.axis = .vertical
+        mainStackView.distribution = .equalSpacing
+        mainStackView.isLayoutMarginsRelativeArrangement = true
+        mainStackView.preservesSuperviewLayoutMargins = true
+        view.addSubview(mainStackView)
         
     }
     
@@ -99,26 +121,6 @@ final class SingInViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    private func setButtons() {
-        
-        singInButton.setTitle("Sing In", for: .normal)
-        singInButton.backgroundColor = .blue
-        singInButton.layer.cornerRadius = 10
-        singInButton.addTarget(self, action: #selector(singInAction), for: .touchUpInside)
-        
-        singUpButton.setTitle("Sing Up", for: .normal)
-        singUpButton.setTitleColor(.blue, for: .normal)
-        singUpButton.addTarget(self, action: #selector(singUpAction), for: .touchUpInside)
-        
-    }
-    
-    private func setLoginMessageLabel() {
-        
-        loginMessageLabel.text = "Login with Email Address"
-        loginMessageLabel.numberOfLines = 0
-        loginMessageLabel.font = UIFont.boldSystemFont(ofSize: 30)
-        
-    }
     
     private func setConstraintsAndAddSubview() {
         

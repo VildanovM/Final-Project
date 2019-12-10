@@ -9,6 +9,11 @@ target 'Git4IOS' do
 
 pod 'Firebase/Core'
 pod 'Firebase/Auth'
-pod 'FirebaseAnalytics'
+
+    target 'Git4IOSTests' do
+        pod 'Firebase/Core'
+        pod 'Firebase/Auth'
+        inherit! :complete
+    end
 
 end

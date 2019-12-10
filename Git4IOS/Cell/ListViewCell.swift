@@ -14,7 +14,7 @@ final class ListViewCell: UITableViewCell {
     public static let reuseID = "ReuseId"
     public var titleName = UILabel()
     public var starCount = UILabel()
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -48,8 +48,8 @@ final class ListViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
     }
     
-
+    
 }

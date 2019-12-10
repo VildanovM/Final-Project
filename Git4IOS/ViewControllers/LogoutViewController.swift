@@ -13,12 +13,12 @@ final class LogoutViewController: UIViewController {
     
     // MARK: - Public variables
     public weak var delegate: TabBarCoordinatorDelegate?
+    public let logoutButton = UIButton()
+    public let logoutLabel = UILabel()
     // MARK: - Private variables
-    private let logoutButton = UIButton()
-    private let logoutLabel = UILabel()
     private let logoutStackView = UIStackView()
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -46,14 +46,14 @@ final class LogoutViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
     }
     
-    private func setLogoutLabel() {
+    public func setLogoutLabel() {
         logoutLabel.text = "Already leaving? We will miss you! 😢"
         logoutLabel.numberOfLines = 0
         logoutLabel.font = UIFont.boldSystemFont(ofSize: 30)
     }
     
-
-    private func setLogoutButton() {
+    
+    public func setLogoutButton() {
         logoutButton.setTitle("Logout", for: .normal)
         logoutButton.backgroundColor = .blue
         logoutButton.layer.cornerRadius = 10
@@ -84,14 +84,14 @@ final class LogoutViewController: UIViewController {
     }
     
     private func createAlertInvalidLogout(messageText: String) {
-         
-         let alertController = UIAlertController(title: "Error", message: messageText, preferredStyle: .alert)
-         
-         let allertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-         alertController.addAction(allertAction)
-         self.present(alertController, animated: true, completion: nil)
-         
-     }
+        
+        let alertController = UIAlertController(title: "Error", message: messageText, preferredStyle: .alert)
+        
+        let allertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(allertAction)
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
     
     @objc private func pushToSingInViewController() {
         logoutButton.pulsate()
@@ -110,5 +110,5 @@ final class LogoutViewController: UIViewController {
         }
         
     }
-
+    
 }

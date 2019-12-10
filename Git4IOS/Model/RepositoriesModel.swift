@@ -11,7 +11,7 @@ import Foundation
 struct Model: Decodable {
     
     var items : [Items]
-
+    
 }
 
 struct Items: Decodable {

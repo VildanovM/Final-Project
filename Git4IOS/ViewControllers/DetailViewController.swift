@@ -44,13 +44,13 @@ final class DetailViewController: UIViewController {
         super.viewWillAppear(animated)
         descriptionRepository.alpha = 0
         UIView.animate(withDuration: 1, animations: { [weak self] in
-        guard let self = self else {return}
+            guard let self = self else {return}
             self.descriptionRepository.alpha = 1
         })
     }
     
     
-    private func setViews() {
+    public func setViews() {
         
         view.backgroundColor = .white
         self.title = titleRepositories

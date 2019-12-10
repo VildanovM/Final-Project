@@ -26,8 +26,36 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "972C3E322386D32100189EF0"
+            BuildableName = "Git4IOS.app"
+            BlueprintName = "Git4IOS"
+            ReferencedContainer = "container:Git4IOS.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "97B35156239FD19000E9A079"
+            BuildableName = "Git4IOSTests.xctest"
+            BlueprintName = "Git4IOSTests"
+            ReferencedContainer = "container:Git4IOS.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "97B35156239FD19000E9A079"
+               BuildableName = "Git4IOSTests.xctest"
+               BlueprintName = "Git4IOSTests"
+               ReferencedContainer = "container:Git4IOS.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

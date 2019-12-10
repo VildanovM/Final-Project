@@ -28,12 +28,12 @@ final class SingInCoordinator: Coordinator {
 
 extension SingInCoordinator: SingInControllerDelegate {
     
-
+    
     func navigateToNextPage() {
-       let tabBarCoordinator = TabBarCoordinator(navigationController: navigationController)
-       tabBarCoordinator.delegate = self
-       childCoordinators.append(tabBarCoordinator)
-       tabBarCoordinator.start()
+        let tabBarCoordinator = TabBarCoordinator(navigationController: navigationController)
+        tabBarCoordinator.delegate = self
+        childCoordinators.append(tabBarCoordinator)
+        tabBarCoordinator.start()
     }
     
     func navigateToSingUpPage() {

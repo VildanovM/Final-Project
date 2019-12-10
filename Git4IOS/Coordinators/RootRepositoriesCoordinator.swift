@@ -25,7 +25,7 @@ final class RootRepositoriesCoordinator: UIViewController, UINavigationControlle
     private lazy var tabbarController = UITabBarController()
     private lazy var navController = UINavigationController(rootViewController: segmentedViewController)
     
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +43,7 @@ final class RootRepositoriesCoordinator: UIViewController, UINavigationControlle
         let listTabBarItem = UITabBarItem(title: "Repositories", image: imageRepository, tag: 0)
         let githubTabBarItem = UITabBarItem(title: "Go To Github", image: imageGithub, tag: 1)
         let quitTabBarItem = UITabBarItem(title: "Quit", image: imageQuit, tag: 2)
-
+        
         segmentedViewController.tabBarItem = listTabBarItem
         gitHubViewController.tabBarItem = githubTabBarItem
         logoutViewController.tabBarItem = quitTabBarItem
@@ -52,7 +52,7 @@ final class RootRepositoriesCoordinator: UIViewController, UINavigationControlle
         
         add(asChildViewController: tabbarController)
         segmentedViewController.items = [swiftRepositoriesViewCoordinator, objectiveCRepositoriesViewCoordinator]
-    
+        
     }
     
     public func goToRepository(url:String, viewController: UIViewController) {
